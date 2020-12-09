@@ -1,21 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  function loginClicked() {
+    // eslint-disable-next-line no-console
+    console.log('login clicked');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Edit and end it all.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          role="button"
+          onClick={loginClicked}
+          tabIndex="0"
+          onKeyPress={loginClicked}
         >
-          Learn React
-        </a>
+          Login
+        </div>
       </header>
     </div>
   );
