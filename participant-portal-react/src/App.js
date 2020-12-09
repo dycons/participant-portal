@@ -26,7 +26,7 @@ function App() {
       loggedIn: authed,
       user: tempKeycloak.idTokenParsed,
     });
-    console.log(`Auth is ${authed}`);
+    console.log(`Authed is ${authed}`);
     console.log({ tempKeycloak });
   };
 
@@ -50,7 +50,14 @@ function App() {
         {auth.user && (
           <div>
             <div>Logged in.</div>
-            <div>{auth.user.email}</div>
+            <div>
+              Email:
+              <span>{auth.user.email}</span>
+            </div>
+            <div>
+              JWT:
+              <span>{auth.keycloak.idToken}</span>
+            </div>
           </div>
         )}
       </header>
