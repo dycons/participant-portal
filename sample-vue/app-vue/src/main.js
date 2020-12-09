@@ -6,7 +6,7 @@ import * as Keycloak from 'keycloak-js';
 Vue.use(VueLogger);
 
 let initOptions = {
-  url: 'http://127.0.0.1:8080/auth', realm: 'dycons', clientId: 'sample-vue-client', onLoad: 'login-required'
+  url: 'http://127.0.0.1:8080/auth', realm: 'dycons-participant-idp', clientId: 'sample-vue-client', onLoad: 'login-required'
 }
 
 let keycloak = Keycloak(initOptions);

@@ -19,7 +19,7 @@ function App() {
     };
 
     const tempKeycloak = Keycloak(initOptions);
-    const authed = await tempKeycloak.init();
+    const authed = await tempKeycloak.init({ onLoad: 'check-sso' });
     setAuth({
       ...auth,
       keycloak: tempKeycloak,
