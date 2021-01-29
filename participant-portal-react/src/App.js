@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import IdentityProvider from './components/IdentityProvider';
+import ProjectConsents from './components/ProjectConsents';
 
 function App() {
   // 0. Modify IdentityProvider configuration for host, realm, and client-id
@@ -27,6 +28,19 @@ function App() {
     })();
   }, []);
 
+  const consents = [
+    {
+      project_application_id: 1,
+      genetic_consent: true,
+      clinical_consent: true,
+    },
+    {
+      project_application_id: 2,
+      genetic_consent: false,
+      clinical_consent: false,
+    },
+  ];
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,6 +60,7 @@ function App() {
               JWT:
               <span>{auth.keycloak.idToken}</span>
             </div>
+            <ProjectConsents consents={consents} />
           </div>
         )}
       </header>
