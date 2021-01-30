@@ -1,8 +1,13 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
+
+/* eslint-disable object-curly-newline */
+import { Container, Jumbotron, Row, Col } from 'react-bootstrap';
+
 import './App.css';
 import IdentityProvider from './components/IdentityProvider';
 import ProjectConsents from './components/ProjectConsents';
+import LoginCard from './components/LoginCard';
 
 function App() {
   // 0. Modify IdentityProvider configuration for host, realm, and client-id
@@ -42,29 +47,17 @@ function App() {
   ];
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {!auth.loggedIn && auth.keycloak && (
-          <div role="button" onClick={login} tabIndex="0" onKeyPress={login}>
-            Login
-          </div>
-        )}
-        {auth.user && (
-          <div>
-            <div>Logged in.</div>
-            <div>
-              Email:
-              <span>{auth.user.email}</span>
-            </div>
-            <div>
-              JWT:
-              <span>{auth.keycloak.idToken}</span>
-            </div>
-            <ProjectConsents consents={consents} />
-          </div>
-        )}
-      </header>
-    </div>
+    <Container>
+      <Jumbotron>
+        <h1 className="header">Dycons - Participant Portal</h1>
+      </Jumbotron>
+      <Row>
+        <Col>
+          <LoginCard auth={auth} login={login} />
+          <ProjectConsents consents={consents} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
