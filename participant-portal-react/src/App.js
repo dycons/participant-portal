@@ -8,6 +8,7 @@ import './App.css';
 import IdentityProvider from './components/IdentityProvider';
 import ProjectConsents from './components/ProjectConsents';
 import LoginCard from './components/LoginCard';
+import DefaultConsent from './components/DefaultConsent';
 
 function App() {
   // 0. Modify IdentityProvider configuration for host, realm, and client-id
@@ -46,6 +47,11 @@ function App() {
     },
   ];
 
+  const defaultConsent = {
+    genetic_consent: false,
+    clinical_consent: false,
+  };
+
   return (
     <Container>
       <Jumbotron>
@@ -54,6 +60,7 @@ function App() {
       <Row>
         <Col>
           <LoginCard auth={auth} login={login} />
+          <DefaultConsent defaultConsent={defaultConsent} />
           <ProjectConsents consents={consents} />
         </Col>
       </Row>
