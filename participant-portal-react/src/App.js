@@ -6,7 +6,9 @@ import { Container, Jumbotron, Row, Col } from 'react-bootstrap';
 
 import './App.css';
 import IdentityProvider from './components/IdentityProvider';
+import ProjectConsents from './components/ProjectConsents';
 import LoginCard from './components/LoginCard';
+import DefaultConsent from './components/DefaultConsent';
 
 function App() {
   // 0. Modify IdentityProvider configuration for host, realm, and client-id
@@ -32,14 +34,34 @@ function App() {
     })();
   }, []);
 
+  const consents = [
+    {
+      project_application_id: 1,
+      genetic_consent: true,
+      clinical_consent: true,
+    },
+    {
+      project_application_id: 2,
+      genetic_consent: false,
+      clinical_consent: false,
+    },
+  ];
+
+  const defaultConsent = {
+    genetic_consent: false,
+    clinical_consent: false,
+  };
+
   return (
-    <Container className="p-3">
+    <Container>
       <Jumbotron>
         <h1 className="header">Dycons - Participant Portal</h1>
       </Jumbotron>
       <Row>
         <Col>
           <LoginCard auth={auth} login={login} />
+          <DefaultConsent defaultConsent={defaultConsent} />
+          <ProjectConsents consents={consents} />
         </Col>
       </Row>
     </Container>
