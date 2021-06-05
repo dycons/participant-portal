@@ -19,6 +19,11 @@ function App() {
     user: null,
   });
 
+  const [consents, setConsents] = useState({
+    projectConsents: [],
+    defaultConsent: {},
+  });
+
   // 3 Call keycloak.login() to log into Keycloak
   function login() {
     auth.keycloak.login();
@@ -30,27 +35,11 @@ function App() {
   // 2.3 call IdentityProvider.init to trigger auth initialization and set to auth
   useEffect(() => {
     (async () => {
-      setAuth(await IdentityProvider.init());
+      const a = await IdentityProvider.init();
+      setAuth(a);
+      setConsents(await IdentityProvider.getConsents(a));
     })();
   }, []);
-
-  const consents = [
-    {
-      project_application_id: 1,
-      genetic_consent: true,
-      clinical_consent: true,
-    },
-    {
-      project_application_id: 2,
-      genetic_consent: false,
-      clinical_consent: false,
-    },
-  ];
-
-  const defaultConsent = {
-    genetic_consent: false,
-    clinical_consent: false,
-  };
 
   return (
     <Container>
@@ -60,8 +49,8 @@ function App() {
       <Row>
         <Col>
           <LoginCard auth={auth} login={login} />
-          <DefaultConsent defaultConsent={defaultConsent} />
-          <ProjectConsents consents={consents} />
+          <DefaultConsent defaultConsent={consents.defaultConsent} />
+          <ProjectConsents consents={consents.projectConsents} />
         </Col>
       </Row>
     </Container>

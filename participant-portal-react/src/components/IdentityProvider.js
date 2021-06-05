@@ -18,4 +18,35 @@ idp.init = async () => {
   };
 };
 
+idp.getConsents = async (auth) => {
+  // TODO: Build bearer token from jwt in auth object
+  // eslint-disable-next-line max-len
+  // eslint-disable-next-line operator-linebreak
+  const bearer =
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1pYyBGb2siLCJyb2xlIjoicmVzZWFyY2gtcGFydGljaXBhbnQiLCJhZG1pbl9pZCI6IjEiLCJpYXQiOjE1MTYyMzkwMjIsImp0aSI6IjNkMzUwZjU5LTliYTUtNDU4OS1hNTgxLTg5NjI5YWQ2NmU1NyIsImV4cCI6MTYxMzA5NDkxNX0.5iT-x_PLbHgYg7pA4HhBNtiEE41_4teOYY3NwnRCsAw';
+
+  const myHeaders = new Headers();
+  myHeaders.append('Authorization', bearer);
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow',
+  };
+
+  let consents = {};
+  await fetch('http://0.0.0.0:3006/consents', requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      consents = {
+        projectConsents: result.project_consents,
+        defaultConsent: result.default_consent,
+      };
+    })
+    .catch((error) => console.log('error', error));
+
+  return consents;
+};
+
 export default idp;

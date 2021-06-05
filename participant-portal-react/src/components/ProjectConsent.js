@@ -9,11 +9,11 @@ export default function ProjectConsent(props) {
   const clinicalConsent = consent.clinical_consent ? 'Yes' : 'No';
   return (
     <div>
-      <h2>
+      <h4>
         Project&nbsp;
         <span>{consent.project_application_id}</span>
         <span>: Consents to sharing data</span>
-      </h2>
+      </h4>
       <Table striped>
         <tbody>
           <tr>

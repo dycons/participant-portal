@@ -7,8 +7,14 @@ export default function ProjectConsents(props) {
 
   return (
     <Card body>
+      <div>
+        <h2>Project Consents</h2>
+      </div>
       {consents.map((consent) => (
-        <ProjectConsent consent={consent} />
+        <ProjectConsent
+          key={consent.project_application_id}
+          consent={consent}
+        />
       ))}
     </Card>
   );

@@ -15,4 +15,4 @@ RUN yarn install
 # build app for production with minification
 # RUN npm run build-prod
 
-CMD [ "yarn", "start" ]🚫
+CMD [ "yarn", "start" ]
