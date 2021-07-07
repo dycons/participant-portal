@@ -34,17 +34,21 @@ idp.getConsents = async (auth) => {
     redirect: 'follow',
   };
 
-  let consents = {};
-  await fetch('http://0.0.0.0:3006/consents', requestOptions)
+  const host = process.env.REACT_APP_RELAY_HOST;
+
+  let consents = {
+    projectConsents: [],
+    defaultConsent: {},
+  };
+  await fetch(`${host}/consents`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       consents = {
         projectConsents: result.project_consents,
         defaultConsent: result.default_consent,
       };
     })
-    .catch((error) => console.log('error', error));
+    .catch((error) => alert(`Unable to fetch consents: ${error}`));
 
   return consents;
 };
